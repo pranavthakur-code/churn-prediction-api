@@ -1,0 +1,567 @@
+components:
+  schemas:
+    BatchRequest:
+      additionalProperties: false
+      properties:
+        customers:
+          description: 1 to CHURN_MAX_BATCH records
+          items:
+            $ref: '#/components/schemas/Customer'
+          minItems: 1
+          title: Customers
+          type: array
+      required:
+      - customers
+      title: BatchRequest
+      type: object
+    BatchResponse:
+      properties:
+        count:
+          title: Count
+          type: integer
+        model_version:
+          title: Model Version
+          type: string
+        predictions:
+          items:
+            $ref: '#/components/schemas/Prediction'
+          title: Predictions
+          type: array
+      required:
+      - predictions
+      - count
+      - model_version
+      title: BatchResponse
+      type: object
+    Customer:
+      additionalProperties: false
+      description: One customer record, using the column names of the public Telco
+        churn dataset.
+      example:
+        Contract: Month-to-month
+        Dependents: 'No'
+        DeviceProtection: 'No'
+        InternetService: DSL
+        MonthlyCharges: 29.85
+        MultipleLines: No phone service
+        OnlineBackup: 'Yes'
+        OnlineSecurity: 'No'
+        PaperlessBilling: 'Yes'
+        Partner: 'Yes'
+        PaymentMethod: Electronic check
+        PhoneService: 'No'
+        SeniorCitizen: 0
+        StreamingMovies: 'No'
+        StreamingTV: 'No'
+        TechSupport: 'No'
+        TotalCharges: 29.85
+        customerID: 7590-VHVEG
+        gender: Female
+        tenure: 1
+      properties:
+        Contract:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Contract
+          type: string
+        Dependents:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Dependents
+          type: string
+        DeviceProtection:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Deviceprotection
+          type: string
+        InternetService:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Internetservice
+          type: string
+        MonthlyCharges:
+          description: Current monthly bill, USD
+          maximum: 1000.0
+          minimum: 0.0
+          title: Monthlycharges
+          type: number
+        MultipleLines:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Multiplelines
+          type: string
+        OnlineBackup:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Onlinebackup
+          type: string
+        OnlineSecurity:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Onlinesecurity
+          type: string
+        PaperlessBilling:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Paperlessbilling
+          type: string
+        Partner:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Partner
+          type: string
+        PaymentMethod:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Paymentmethod
+          type: string
+        PhoneService:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Phoneservice
+          type: string
+        SeniorCitizen:
+          description: 1 if senior citizen, else 0
+          maximum: 1.0
+          minimum: 0.0
+          title: Seniorcitizen
+          type: integer
+        StreamingMovies:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Streamingmovies
+          type: string
+        StreamingTV:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Streamingtv
+          type: string
+        TechSupport:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Techsupport
+          type: string
+        TotalCharges:
+          anyOf:
+          - maximum: 200000.0
+            minimum: 0.0
+            type: number
+          - type: 'null'
+          description: Lifetime billed amount, USD. Null or empty for brand-new customers
+            (the source data stores this column as text)
+          title: Totalcharges
+        customerID:
+          anyOf:
+          - maxLength: 64
+            type: string
+          - type: 'null'
+          description: Echoed back; not used by the model
+          title: Customerid
+        gender:
+          description: Category label; unseen labels are accepted with a warning
+          maxLength: 64
+          minLength: 1
+          title: Gender
+          type: string
+        tenure:
+          description: Months with the company
+          maximum: 120.0
+          minimum: 0.0
+          title: Tenure
+          type: integer
+      required:
+      - gender
+      - SeniorCitizen
+      - Partner
+      - Dependents
+      - tenure
+      - PhoneService
+      - MultipleLines
+      - InternetService
+      - OnlineSecurity
+      - OnlineBackup
+      - DeviceProtection
+      - TechSupport
+      - StreamingTV
+      - StreamingMovies
+      - Contract
+      - PaperlessBilling
+      - PaymentMethod
+      - MonthlyCharges
+      title: Customer
+      type: object
+    DriftResponse:
+      properties:
+        drift_detected:
+          title: Drift Detected
+          type: boolean
+        features:
+          additionalProperties:
+            $ref: '#/components/schemas/FeatureDrift'
+          title: Features
+          type: object
+        flagged_features:
+          items:
+            type: string
+          title: Flagged Features
+          type: array
+        model_version:
+          title: Model Version
+          type: string
+        n_rows:
+          title: N Rows
+          type: integer
+        threshold:
+          title: Threshold
+          type: number
+      required:
+      - model_version
+      - n_rows
+      - threshold
+      - drift_detected
+      - flagged_features
+      - features
+      title: DriftResponse
+      type: object
+    ErrorItem:
+      properties:
+        field:
+          title: Field
+          type: string
+        message:
+          title: Message
+          type: string
+        type:
+          title: Type
+          type: string
+      required:
+      - field
+      - message
+      - type
+      title: ErrorItem
+      type: object
+    ErrorResponse:
+      properties:
+        error:
+          title: Error
+          type: string
+        errors:
+          items:
+            $ref: '#/components/schemas/ErrorItem'
+          title: Errors
+          type: array
+        message:
+          title: Message
+          type: string
+        request_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Request Id
+      required:
+      - error
+      - message
+      title: ErrorResponse
+      type: object
+    FeatureDrift:
+      properties:
+        flagged:
+          title: Flagged
+          type: boolean
+        psi:
+          title: Psi
+          type: number
+        status:
+          description: stable (<0.1), moderate (0.1-0.2) or significant (>0.2)
+          title: Status
+          type: string
+      required:
+      - psi
+      - status
+      - flagged
+      title: FeatureDrift
+      type: object
+    Health:
+      properties:
+        model_loaded:
+          title: Model Loaded
+          type: boolean
+        model_version:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model Version
+        status:
+          title: Status
+          type: string
+      required:
+      - status
+      - model_loaded
+      title: Health
+      type: object
+    ModelInfo:
+      properties:
+        cost_model:
+          additionalProperties: true
+          title: Cost Model
+          type: object
+        libraries:
+          additionalProperties: true
+          title: Libraries
+          type: object
+        model_family:
+          title: Model Family
+          type: string
+        model_sha256:
+          title: Model Sha256
+          type: string
+        model_version:
+          title: Model Version
+          type: string
+        test_metrics:
+          additionalProperties: true
+          title: Test Metrics
+          type: object
+        threshold:
+          title: Threshold
+          type: number
+        trained_at:
+          title: Trained At
+          type: string
+        training_data_sha256:
+          title: Training Data Sha256
+          type: string
+      required:
+      - model_version
+      - model_family
+      - threshold
+      - trained_at
+      - training_data_sha256
+      - model_sha256
+      - cost_model
+      - test_metrics
+      - libraries
+      title: ModelInfo
+      type: object
+    Prediction:
+      properties:
+        churn_predicted:
+          description: True when probability >= the model's threshold
+          title: Churn Predicted
+          type: boolean
+        churn_probability:
+          maximum: 1.0
+          minimum: 0.0
+          title: Churn Probability
+          type: number
+        customer_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          description: customerID from the request, if given
+          title: Customer Id
+        threshold:
+          title: Threshold
+          type: number
+        warnings:
+          items:
+            type: string
+          title: Warnings
+          type: array
+      required:
+      - churn_probability
+      - churn_predicted
+      - threshold
+      title: Prediction
+      type: object
+    PredictionResponse:
+      properties:
+        model_version:
+          title: Model Version
+          type: string
+        prediction:
+          $ref: '#/components/schemas/Prediction'
+      required:
+      - prediction
+      - model_version
+      title: PredictionResponse
+      type: object
+  securitySchemes:
+    APIKeyHeader:
+      description: API key issued to the calling system
+      in: header
+      name: X-API-Key
+      type: apiKey
+info:
+  description: "\nScores telecom customers for churn risk so the CRM can act in real\
+    \ time.\n\n* Every request except `/health` needs an `X-API-Key` header.\n* `churn_predicted`\
+    \ compares the probability with a **cost-based threshold**\n  (see the model card),\
+    \ not a default 0.5.\n* Unknown category labels are accepted and flagged in `warnings`;\
+    \ malformed\n  values (wrong type, out of range, missing or unexpected fields)\
+    \ get a `422`\n  that names each offending field.\n"
+  title: Churn Prediction API
+  version: 1.0.0
+openapi: 3.1.0
+paths:
+  /drift:
+    post:
+      operationId: drift_drift_post
+      parameters:
+      - in: query
+        name: psi_threshold
+        required: false
+        schema:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Psi Threshold
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DriftResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Missing or invalid API key
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request body
+      security:
+      - APIKeyHeader: []
+      summary: Population Stability Index of recent inputs vs training data
+      tags:
+      - monitoring
+  /health:
+    get:
+      operationId: health_health_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+          description: Successful Response
+      summary: Liveness and readiness
+      tags:
+      - ops
+  /model-info:
+    get:
+      operationId: model_info_model_info_get
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelInfo'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Missing or invalid API key
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request body
+      security:
+      - APIKeyHeader: []
+      summary: Which model is serving, and how it was trained
+      tags:
+      - ops
+  /predict:
+    post:
+      operationId: predict_predict_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Customer'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Missing or invalid API key
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request body
+      security:
+      - APIKeyHeader: []
+      summary: Score one customer
+      tags:
+      - prediction
+  /predict/batch:
+    post:
+      operationId: predict_batch_predict_batch_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchRequest'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BatchResponse'
+          description: Successful Response
+        '401':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Missing or invalid API key
+        '422':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Invalid request body
+      security:
+      - APIKeyHeader: []
+      summary: Score up to CHURN_MAX_BATCH customers
+      tags:
+      - prediction

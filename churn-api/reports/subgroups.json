@@ -1,0 +1,101 @@
+[
+ {
+  "group": "gender",
+  "value": "Female",
+  "n": 687,
+  "churn_rate": 0.281,
+  "auc": 0.836,
+  "recall_at_threshold": 0.881,
+  "flagged_share": 0.53
+ },
+ {
+  "group": "gender",
+  "value": "Male",
+  "n": 722,
+  "churn_rate": 0.251,
+  "auc": 0.847,
+  "recall_at_threshold": 0.917,
+  "flagged_share": 0.53
+ },
+ {
+  "group": "SeniorCitizen",
+  "value": "0",
+  "n": 1187,
+  "churn_rate": 0.233,
+  "auc": 0.842,
+  "recall_at_threshold": 0.87,
+  "flagged_share": 0.48
+ },
+ {
+  "group": "SeniorCitizen",
+  "value": "1",
+  "n": 222,
+  "churn_rate": 0.441,
+  "auc": 0.781,
+  "recall_at_threshold": 0.98,
+  "flagged_share": 0.797
+ },
+ {
+  "group": "Contract",
+  "value": "Month-to-month",
+  "n": 773,
+  "churn_rate": 0.426,
+  "auc": 0.742,
+  "recall_at_threshold": 0.964,
+  "flagged_share": 0.865
+ },
+ {
+  "group": "Contract",
+  "value": "One year",
+  "n": 300,
+  "churn_rate": 0.12,
+  "auc": 0.738,
+  "recall_at_threshold": 0.528,
+  "flagged_share": 0.253
+ },
+ {
+  "group": "Contract",
+  "value": "Two year",
+  "n": 336,
+  "churn_rate": 0.027,
+  "auc": 0.759,
+  "recall_at_threshold": 0.0,
+  "flagged_share": 0.006
+ },
+ {
+  "group": "tenure_band",
+  "value": "0-12",
+  "n": 449,
+  "churn_rate": 0.479,
+  "auc": 0.745,
+  "recall_at_threshold": 0.963,
+  "flagged_share": 0.869
+ },
+ {
+  "group": "tenure_band",
+  "value": "13-24",
+  "n": 206,
+  "churn_rate": 0.291,
+  "auc": 0.813,
+  "recall_at_threshold": 0.967,
+  "flagged_share": 0.709
+ },
+ {
+  "group": "tenure_band",
+  "value": "25-48",
+  "n": 304,
+  "churn_rate": 0.211,
+  "auc": 0.798,
+  "recall_at_threshold": 0.797,
+  "flagged_share": 0.454
+ },
+ {
+  "group": "tenure_band",
+  "value": "49+",
+  "n": 450,
+  "churn_rate": 0.078,
+  "auc": 0.831,
+  "recall_at_threshold": 0.571,
+  "flagged_share": 0.162
+ }
+]

@@ -1,0 +1,146 @@
+{
+  "model_version": "churn-logistic-16320c9c",
+  "cv": {
+    "logistic": {
+      "best_cv_auc": 0.8463,
+      "cv_std": 0.0127,
+      "best_params": {
+        "clf__C": 10.0
+      }
+    },
+    "hgb": {
+      "best_cv_auc": 0.8496,
+      "cv_std": 0.0108,
+      "best_params": {
+        "clf__l2_regularization": 1.0,
+        "clf__learning_rate": 0.03,
+        "clf__max_depth": 4,
+        "clf__min_samples_leaf": 60
+      }
+    }
+  },
+  "selected": "logistic",
+  "one_se_margin": 0.0057,
+  "threshold": 0.17,
+  "analytic_threshold": 0.2,
+  "test": {
+    "n": 1409,
+    "churn_rate": 0.2654,
+    "roc_auc": 0.8411,
+    "roc_auc_ci95": [
+      0.8181,
+      0.8618
+    ],
+    "brier": 0.1386,
+    "at_threshold": {
+      "threshold": 0.17,
+      "precision": 0.4498,
+      "recall": 0.8984,
+      "f1": 0.5995,
+      "tn": 624,
+      "fp": 411,
+      "fn": 38,
+      "tp": 336
+    },
+    "at_0.5": {
+      "threshold": 0.5,
+      "precision": 0.6572,
+      "recall": 0.5588,
+      "f1": 0.604,
+      "tn": 926,
+      "fp": 109,
+      "fn": 165,
+      "tp": 209
+    },
+    "cost_per_customer": 59.77,
+    "cost_no_action_per_customer": 79.63,
+    "cost_offer_everyone_per_customer": 69.82,
+    "calibration": {
+      "mean_predicted": [
+        0.006,
+        0.027,
+        0.068,
+        0.142,
+        0.246,
+        0.396,
+        0.549,
+        0.71
+      ],
+      "fraction_positive": [
+        0.011,
+        0.017,
+        0.074,
+        0.176,
+        0.273,
+        0.318,
+        0.517,
+        0.739
+      ]
+    }
+  },
+  "cost_sensitivity": [
+    {
+      "customer_value": 300,
+      "offer_cost": 30,
+      "save_rate": 0.5,
+      "analytic_threshold": 0.2,
+      "empirical_threshold": 0.17,
+      "test_cost_per_customer": 59.77,
+      "no_action_per_customer": 79.63
+    },
+    {
+      "customer_value": 300,
+      "offer_cost": 15,
+      "save_rate": 0.5,
+      "analytic_threshold": 0.1,
+      "empirical_threshold": 0.13,
+      "test_cost_per_customer": 51.41,
+      "no_action_per_customer": 79.63
+    },
+    {
+      "customer_value": 300,
+      "offer_cost": 60,
+      "save_rate": 0.5,
+      "analytic_threshold": 0.4,
+      "empirical_threshold": 0.43,
+      "test_cost_per_customer": 71.86,
+      "no_action_per_customer": 79.63
+    },
+    {
+      "customer_value": 600,
+      "offer_cost": 30,
+      "save_rate": 0.5,
+      "analytic_threshold": 0.1,
+      "empirical_threshold": 0.13,
+      "test_cost_per_customer": 102.82,
+      "no_action_per_customer": 159.26
+    },
+    {
+      "customer_value": 150,
+      "offer_cost": 30,
+      "save_rate": 0.5,
+      "analytic_threshold": 0.4,
+      "empirical_threshold": 0.43,
+      "test_cost_per_customer": 35.93,
+      "no_action_per_customer": 39.82
+    },
+    {
+      "customer_value": 300,
+      "offer_cost": 30,
+      "save_rate": 0.3,
+      "analytic_threshold": 0.333,
+      "empirical_threshold": 0.35,
+      "test_cost_per_customer": 73.01,
+      "no_action_per_customer": 79.63
+    },
+    {
+      "customer_value": 300,
+      "offer_cost": 30,
+      "save_rate": 0.8,
+      "analytic_threshold": 0.125,
+      "empirical_threshold": 0.13,
+      "test_cost_per_customer": 37.92,
+      "no_action_per_customer": 79.63
+    }
+  ]
+}
