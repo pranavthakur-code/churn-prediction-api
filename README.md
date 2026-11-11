@@ -1,4 +1,3 @@
-[README (4).md](https://github.com/user-attachments/files/34675285/README.4.md)
 # Churn Prediction API
 
 A scikit-learn churn model packaged as a secure FastAPI service: versioned and traceable model artefact, validated inputs, API-key auth, structured logs, a drift check, a multi-stage Dockerfile and 82 tests.
